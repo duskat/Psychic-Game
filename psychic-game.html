@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+<body>
+   
+        <div> 
+            <h1>
+                The Psychic Game
+            </h1>
+            <h3>
+                Guess what letter I am thinking of
+            </h3>
+            <h4>
+                To start the game hit any letter. You have 9 attempts to guess the letter.
+            </h4>
+            <div id="game">
+
+            </div>
+        </div>   
+    
+   <script>
+       
+
+            var wins = 0;
+            var losses = 0; 
+            var guessesleft = 9;
+            var yourguess = 0;
+            var alphabet = "abcdefghijklmnopqrstuvwxyz";
+            var alpha = alphabet.split("");
+            // console.log(alpha);
+            var computer = alpha[Math.floor(Math.random()*alpha.length)];
+            var userguess = [];
+            function reset(){
+                computer = alpha[Math.floor(Math.random()*alpha.length)];
+            }
+            console.log(computer);
+
+                document.onkeyup = function(event){
+                var user = event.key.toLowerCase();
+                // if (isNaN(user)){
+                //     alert("You hit " + user);
+                //     }
+                // else {
+                //     alert("Please type letter only");
+                //     } 
+                console.log(user);
+                
+                if (userguess.length < 9){
+                    userguess.push(user);
+                    guessesleft --;       
+                }     
+
+                else {
+                    userguess = [];
+                    guessesleft = 9;
+                    reset();
+                    console.log(computer + " - New random letter");
+                    yourguess = (user + ",");
+                }
+                // var arr = userguess.push(user);
+                            
+                if (user === computer) {
+                    wins++;
+                    userguess = [];
+                    guessesleft = 9;
+                    yourguess = (user + ",");
+                    reset();
+                    console.log(computer + " - New random letter");
+                     }   
+    
+                 if (guessesleft == 0) {
+                     losses++;
+                 }
+
+                
+            
+                    
+                var html = "<p>Wins: " + wins + "</p>" + 
+                    "<p>Losses: " + losses + "</p>" + 
+                    "<p>Guesses left: " + guessesleft + "</p>" + 
+                    "<p>Your Guesses so far: " + userguess + "</p>";
+
+            document.getElementById("game").innerHTML = html;
+        }
+    
+    
+    </script>
+    
+</body>
+</html>
